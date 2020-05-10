@@ -1,0 +1,44 @@
+My solution for make_matcher involves building a parse tree from 
+going through the nonterminal rules and symbols. I made recursive 
+functions that are called on the head and tail of each list and 
+maintained the order of traversal so that the parse tree could be 
+generated correctly.
+
+My solution for make_parser is different from the one for 
+make_matcher. What I did for make_parser was have recursive 
+functions that go through the rules and matches it with a fragment 
+and I kept track of which rules get matched. I created a list of 
+these matched rules and wrote functions to convert it into a tree. 
+I then return the root of this tree.
+
+One weakness is that this solution could get stuck in an infinite 
+recursion and reach a stack overflow. For example, if there is a 
+rule were Expr -> Expr, the program will go into infinite loop. This 
+is because Expr is both the rule and the first nonterminal symbol so 
+the recursive function will keep calling the same function. An example 
+of this is shown below. I modified the test grammar shown in hw2test.ml
+so that Red is on both the left hand side and the right had side.
+
+
+Test Grammar:
+let test_grammar =
+  (Red,
+  function
+    | Red ->
+        [[N Green];
+        [N Blue; N Orange];
+        [N Yellow; N Green; N Blue]]
+
+Output:
+# #use "hw2test.ml";;
+val accept_all : 'a -> 'a option = <fun>
+type test_nonterms = Red | Orange | Yellow | Green | Blue
+val test_grammar :
+  test_nonterms * (test_nonterms -> (test_nonterms, string) symbol list list) =
+  (Red, <fun>)
+val t : string list = ["purple"; "pink"; "white"; "indigo"]
+Stack overflow during evaluation (looping recursion?).
+
+
+The grammar has to follow the left associative style or else the 
+above will occur.

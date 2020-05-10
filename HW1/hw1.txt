@@ -1,0 +1,23 @@
+To write the function subset, I recursively check if
+the first list elements are in the second list.
+
+To write the function equal_sets, I check if both the 
+lists are subsets of each other.
+
+To write the function set_union, I get the unique elements 
+of each of the sets and combine it with the common elements. 
+
+To write the function set_intersection, I recursively found
+the elements of the first list which were also in the
+second list. 
+
+To write the function set_diff, I recursively checked if
+the elements in the first list were found in the second 
+list.
+
+To write the function computed_fixed_point, I return x
+if f(x) = x. Otherwise, I recursively find f(f(x)) = x.
+
+To write the function filter_reachable, I would find a list
+of non-terminals that can be reached from the master list
+and filter the rules to  keep the reachable nonterminals. 
